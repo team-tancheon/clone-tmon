@@ -2,15 +2,20 @@
 
 ## 개요
 
-소셜 커머스 사이트인 티몬([https://www.tmon.co.kr](https://www.tmon.co.kr)) 의 주요 기능을 클론 코딩을 통해 개발하면서 학습해보는 프로젝트입니다.
+소셜 커머스 사이트인 티몬([https://www.tmon.co.kr](https://www.tmon.co.kr)) 의 주요 기능을 클론 코딩을 통해 개발하면서 학습해보는 프로젝트입니다.  
 
+
+
+
+
+---
 ## 개발 환경
 
 ### Language
 
 - Java 8
 
-- ECMAScript 6
+- ECMAScript 6  
 
   
 
@@ -18,71 +23,71 @@
 
 - Spring Boot 2.3.X, Spring Security, Spring Data JPA
 
-- Gradle, yaml, JUnit 5
+- Gradle, yaml, JUnit 5  
 
   
 
 ### Frontend
 
-- Vue.js, Bootstrap 4
+- Vue.js, Bootstrap 4  
 
   
-
+  
 ### Database
 
-- MySQL
+- MySQL  
 
   
   
 ### IDE
 
-- IntelliJ IDEA Community Edition
+- IntelliJ IDEA Community Edition  
 
   
 
 ### 협업 도구
 
 - AQueryTool ([https://aquerytool.com/](https://aquerytool.com/))
-- Notion ([https://www.notion.so](https://www.notion.so/8c31977726834616868a0a24e3e368ee?v=5eee2fc08b564b9c9f6ecad743f4bd29))
+- Notion ([https://www.notion.so](https://www.notion.so/8c31977726834616868a0a24e3e368ee?v=5eee2fc08b564b9c9f6ecad743f4bd29))  
 
 
 
 
-
+---
 ## 구현 예정 기능
 
  **1.  주요 기능**
 
-- 미정
+- 미정  
   
   
-
+  
  **2.  기타**
 
 - REST API 적용
 - Google OAuth (OAuth 2.0 스펙에 맞춰 진행)
 - JWT를 활용한 인증
-- AWS 배포
+- AWS 배포  
   
   
-
+  
  **3.  가능하다면..**
 
-- ~~Spring Cloud Config Server, Docker, Redis, ElasticSearch 적용~~
+- ~~Spring Cloud Config Server, Docker, Redis, ElasticSearch 적용~~  
 
 
 
 
-
+---
 ## Git Branch 전략
 
 - Branch는 develop, master 2개로 구성
-- 개발 코드는 develop에 반영 후 master로 merge
+- 개발 코드는 develop에 반영 후 master로 merge  
 
 
 
 
-
+---
 ## 프로젝트 진행 방식
 
 - 애자일 방법론..을 적극 수용
