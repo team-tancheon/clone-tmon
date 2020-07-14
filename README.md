@@ -6,7 +6,7 @@
 
 ## 개발 환경
 
-> **Language**
+### Language
 
 - Java 8
 
@@ -14,7 +14,7 @@
 
   
 
-> **Backend**
+### Backend
 
 - Spring Boot 2.3.X, Spring Security, Spring Data JPA
 
@@ -22,25 +22,25 @@
 
   
 
-> **Frontend**
+### Frontend
 
 - Vue.js, Bootstrap 4
 
   
 
-> **Database**
+### Database
 
 - MySQL
 
   
   
-> **IDE**
+### IDE
 
 - IntelliJ IDEA Community Edition
 
   
 
-> **협업 도구**
+### 협업 도구
 
 - AQueryTool ([https://aquerytool.com/](https://aquerytool.com/))
 - Notion ([https://www.notion.so](https://www.notion.so/8c31977726834616868a0a24e3e368ee?v=5eee2fc08b564b9c9f6ecad743f4bd29))
