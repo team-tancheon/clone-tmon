@@ -21,7 +21,7 @@
 
 ### Backend
 
-- Spring Boot 2.3.X, Spring Security, Spring Data JPA
+- Spring Boot 2.3.0, Spring Security, Spring Data JPA
 
 - Gradle, yaml, JUnit 5  
 
@@ -29,7 +29,7 @@
 
 ### Frontend
 
-- Vue.js, Bootstrap 4  
+- Vue.js, 오픈소스 템플릿 Ogani (https://colorlib.com/wp/template/ogani/)
 
   
   
@@ -65,7 +65,7 @@
  **2.  기타**
 
 - REST API 적용
-- Google OAuth (OAuth 2.0 스펙에 맞춰 진행)
+- OAuth 2.0 (Google, Kakao)
 - JWT를 활용한 인증
 - AWS 배포  
   
