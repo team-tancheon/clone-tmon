@@ -1,8 +1,7 @@
 # clone-tmon
 
-## 개요
 
-소셜 커머스 사이트인 티몬([https://www.tmon.co.kr](https://www.tmon.co.kr)) 의 주요 기능을 클론 코딩을 통해 개발하면서 학습해보는 프로젝트입니다.  
+> 소셜 커머스 사이트인 티몬([https://www.tmon.co.kr](https://www.tmon.co.kr)) 의 주요 기능을 클론 코딩을 통해 개발하면서 학습해보는 프로젝트입니다.  
 
 
 
