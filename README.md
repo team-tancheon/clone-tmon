@@ -54,13 +54,13 @@
 　
 ## 구현 예정 기능
 
- **1.  주요 기능**
+### 1. 주요 기능
 
 - 미정  
   
   
   
- **2.  기타**
+### 2. 기타
 
 - REST API 적용
 - OAuth 2.0 (Google, Kakao)
@@ -69,7 +69,7 @@
   
   
   
- **3.  가능하다면..**
+### 3. 가능하다면..
 
 - ~~Spring Cloud Config Server, Docker, Redis, ElasticSearch 적용~~  
 
