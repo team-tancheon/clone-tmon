@@ -12,18 +12,12 @@ repositories {
 }
 
 dependencies {
-//    implementation 'org.springframework.boot:spring-boot-starter'
 
-    compile group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.3.0.RELEASE'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.3.0.RELEASE'
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation 'org.projectlombok:lombok:1.18.12'
+//    implementation 'org.springframework.boot:spring-boot-starter-security:2.3.0.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.3.0.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.3.0.RELEASE'
+    implementation 'mysql:mysql-connector-java:8.0.20'
 
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: '2.3.1.RELEASE'
-
-//    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-//    compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.3.1.RELEASE'
-    compile("org.springframework.boot:spring-boot-starter-data-jpa")
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jdbc', version: '2.3.0.RELEASE'
-    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.20'
+    testCompile 'junit:junit:4.12'
 }
