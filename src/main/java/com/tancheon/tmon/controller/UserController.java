@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final Logger log = LoggerFactory.getLogger(UserController.class);
-    private final UserService userService;
+//    private final UserService userService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity test() {
