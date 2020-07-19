@@ -18,7 +18,7 @@ public class UserController {
     private final Logger log = LoggerFactory.getLogger(UserController.class);
 //    private final UserService userService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/api", method = RequestMethod.GET)
     public ResponseEntity test() {
 
         try {
