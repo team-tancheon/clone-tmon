@@ -11,7 +11,19 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: create
+  thymeleaf:
+    prefix: classpath:templates/
+    suffix: .html
+    check-template-location: true
+    cache: false
+  mvc:
+    static-path-pattern: /static/**
+  devtools:
+    livereload:
+      enabled: true
+  freemarker:
+    cache: false
 
 # Port
 server:
-  port: 9000
+  port: 8080
