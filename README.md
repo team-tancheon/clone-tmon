@@ -21,7 +21,7 @@
 
 - Spring Boot 2.3.0, Spring Security, Spring Data JPA
 
-- Gradle, yaml, JUnit 5  
+- Gradle 5.6.4, yaml, JUnit 5  
 
   
 
