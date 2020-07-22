@@ -1,4 +1,4 @@
-package com.tancheon.tmon.serviceImpl;
+package com.tancheon.tmon.serviceimpl;
 
 import com.tancheon.tmon.service.UserService;
 
