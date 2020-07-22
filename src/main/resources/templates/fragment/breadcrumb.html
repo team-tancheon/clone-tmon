@@ -2,15 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="../static/img/breadcrumb.jpg" th:fragment="commonBreadCrumb">
+    <section class="breadcrumb-section set-bg" data-setbg="/static/img/breadcrumb.jpg" th:fragment="commonBreadCrumb (headerStr, subStr, linkStr)">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Sign In</h2>
+                        <h2 th:text="${headerStr}"></h2>
                         <div class="breadcrumb__option">
-                            <a href="/static/index.html">Home</a>
-                            <span>sign In</span>
+                            <a href="/static/index.html" th:text="${linkStr}"></a>
+                            <span th:text="${subStr}"></span>
                         </div>
                     </div>
                 </div>

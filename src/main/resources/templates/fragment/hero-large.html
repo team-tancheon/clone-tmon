@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <!-- Blog Details Hero Begin -->
+    <section class="blog-details-hero set-bg" data-setbg="/static/img/blog/details/details-hero.jpg" th:fragment="commonLargeHero (headerStr, subStr1, subStr2)">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="blog__details__hero__text">
+                        <h2 th:text="${headerStr}"></h2>
+                        <ul>
+                            <li th:text="${subStr1}"></li>
+                            <li th:text="${subStr2}"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Details Hero End -->
+</body>
+</html>
