@@ -2,7 +2,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/jpadb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/clone_tmon?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
     password: root
   jpa:
@@ -23,7 +23,18 @@ spring:
       enabled: true
   freemarker:
     cache: false
-
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: taw.manage@gmail.com
+    password: tawmanage1!
+    default-encoding: utf-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 # Port
 server:
   port: 8080
