@@ -8,16 +8,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.Arrays;
 import java.util.List;
 
-@Configuration
+//@Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    private List<String> sessionInterceptPatterns = Arrays.asList("/**");
-    private List<String> sessionExcludePatterns = Arrays.asList("/static/**", "/signin", "/error/**");
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new SessionInterceptor())
-                .addPathPatterns(sessionInterceptPatterns)
-                .excludePathPatterns(sessionExcludePatterns);
-    }
+//    private List<String> sessionInterceptPatterns = Arrays.asList("/**");
+//    private List<String> sessionExcludePatterns = Arrays.asList("/static/**", "/signin", "/error/**");
+//
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(new SessionInterceptor())
+//                .addPathPatterns(sessionInterceptPatterns)
+//                .excludePathPatterns(sessionExcludePatterns);
+//    }
 }

@@ -19,25 +19,25 @@ public class UserController {
 //    private final UserService userService;
 
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String indexView() {
-        return "index";
-    }
-
-    @RequestMapping(value = "/api", method = RequestMethod.GET)
-    public ResponseEntity test() {
-
-        try {
-
-        } catch (Exception e) {
-            log.error("test failed => " + e.getMessage());
-        }
-
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "/signin", method = RequestMethod.GET)
-    public String signInView() {
-        return "sign-in";
-    }
+//    @RequestMapping(value = "/", method = RequestMethod.GET)
+//    public String indexView() {
+//        return "index";
+//    }
+//
+//    @RequestMapping(value = "/api", method = RequestMethod.GET)
+//    public ResponseEntity test() {
+//
+//        try {
+//
+//        } catch (Exception e) {
+//            log.error("test failed => " + e.getMessage());
+//        }
+//
+//        return new ResponseEntity(HttpStatus.OK);
+//    }
+//
+//    @RequestMapping(value = "/signin", method = RequestMethod.GET)
+//    public String signInView() {
+//        return "sign-in";
+//    }
 }
