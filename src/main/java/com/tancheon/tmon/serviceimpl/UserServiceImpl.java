@@ -1,9 +1,7 @@
 package com.tancheon.tmon.serviceimpl;
 
 import com.tancheon.tmon.domain.User;
-import com.tancheon.tmon.dto.DomDTO;
 import com.tancheon.tmon.dto.UserDTO;
-import com.tancheon.tmon.repository.DomRepository;
 import com.tancheon.tmon.repository.UserRepository;
 import com.tancheon.tmon.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +12,6 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 @Service
@@ -22,7 +19,6 @@ import java.util.GregorianCalendar;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final DomRepository domRepository;
 
     private final JavaMailSender mailSender;
 
@@ -38,10 +34,16 @@ public class UserServiceImpl implements UserService {
         String encryptPwd = user.getPassword(); //
         user.setPassword(encryptPwd);
 
-        // TODO : 유저 정보 저장
         user.setSignUpTime(new GregorianCalendar());
+        // FIXME : 난수 처리
+        String emailRandKey = "emailkey_temp";
+        user.setEmailRandKey(emailRandKey);
 
-        if(userRepository.save(user.toEntity()) != null){
+        User save = userRepository.save(user.toEntity());
+
+        if(save != null){
+            sendEmailKey(save.getEmail(), emailRandKey);
+            save.setEmailRandKey(emailRandKey);
             return true;
         }
         return false;
@@ -49,19 +51,18 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 회원 가입시 입력한 이메일로 인증 메일 송신
-     * @param email
+     * @param email 메일을 보낼 계정
+     * @Param emailRandKey 인증키 난수
      */
     @Override
-    public void sendEmailKey(String email) {
-        // FIXME : 난수 키 생성
-        String key = "emailKey";
-        
+    public void sendEmailKey(String email, String emailRandKey) {
+
         MimeMessage mail = mailSender.createMimeMessage();
         // FIXME : URL DOMAIN 주의
         String mailText = "<p>Welcome ! </p><br>"
                 +"<p>Thank you for creating your Tmon Account</p><br>"
                 +"<p>To complete your registration, click the link below</p><br>"
-                +"<p><a href='http://localhost:8080/user/complete-signup?email="+email+"&emailkey="+key+"'></p><br>"
+                +"<p><a href='http://localhost:8080/user/complete-signup?email="+email+"&key="+emailRandKey+"'>click link</a></p><br>"
                 +"<p>Tmon Team</p><br>";
         try {
 
@@ -70,18 +71,28 @@ public class UserServiceImpl implements UserService {
             mail.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
             mailSender.send(mail);
 
-            // TODO : USER에 난수 키 컬럼 생성 후 저장
         } catch (MessagingException e) {
             e.printStackTrace();
         }
 
     }
 
+    /**
+     * 이메일 인증을 통한 계정 활성화
+     * @param email 인증할 이메일 계정
+     * @param key 인증키
+     * @return
+     */
     @Override
-    public void testCode(DomDTO dom) {
-        System.out.println("서비스 들어왔다");
-        System.out.println(dom.toEntity().toString());
-        domRepository.save(dom.toEntity());
+    public boolean signUpComplete(String email, String key) {
+        User user = userRepository.findByEmailAndEmailRandKey(email,key);
+
+        user.setEmailAuthorized(true);
+
+        if(userRepository.save(user).isEmailAuthorized()){
+            return true;
+        }
+        return false;
     }
 
 }

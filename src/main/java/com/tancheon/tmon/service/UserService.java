@@ -9,7 +9,9 @@ public interface UserService {
 //    boolean registerUser(UserDTO user);
     boolean registerAccount(UserDTO user);
 
-    void sendEmailKey(String email);
+    void sendEmailKey(String email, String emailRandKey);
 
-    void testCode(DomDTO dom);
+//    void testCode(DomDTO dom);
+
+    boolean signUpComplete(String email, String key);
 }

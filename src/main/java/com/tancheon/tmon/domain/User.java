@@ -35,5 +35,6 @@ public class User {
     private Calendar passwordChangeTime;
     @Column(nullable = false, columnDefinition = "TINYINT", length = 1)
     private boolean emailAuthorized;
+    private String emailRandKey;
 
 }

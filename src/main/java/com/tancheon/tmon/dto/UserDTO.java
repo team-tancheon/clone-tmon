@@ -19,6 +19,11 @@ public class UserDTO {
     private Calendar lastLoginTime;
     private Calendar passwordChangeTime;
     private boolean emailAuthorized;
+    private String emailRandKey;
+
+    // DTO field
+    private String rePassword;
+
 
     public User toEntity(){
         return User.builder()
@@ -30,6 +35,7 @@ public class UserDTO {
                 .lastLoginTime(lastLoginTime)
                 .passwordChangeTime(passwordChangeTime)
                 .emailAuthorized(emailAuthorized)
+                .emailRandKey(emailRandKey)
                 .build();
     }
 }
