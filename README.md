@@ -28,6 +28,7 @@
 ### Frontend
 
 - 오픈소스 템플릿 Ogani (https://colorlib.com/wp/template/ogani/)
+
 - thymeleaf(현재) -> Vue.js(추후 적용)
   
   
