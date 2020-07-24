@@ -26,8 +26,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: taw.manage@gmail.com
-    password: tawmanage1!
+    username: 아이디@gmail.com
+    password: 비밀번호
     default-encoding: utf-8
     properties:
       mail:
