@@ -1,6 +1,5 @@
 package com.tancheon.tmon.domain;
 
-import javafx.beans.property.adapter.JavaBeanBooleanPropertyBuilder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;

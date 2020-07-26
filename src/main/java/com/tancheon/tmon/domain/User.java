@@ -1,14 +1,9 @@
 package com.tancheon.tmon.domain;
 
-import javafx.scene.NodeBuilder;
 import lombok.*;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.Calendar;
-import java.util.Date;
 
 @Getter
 @Setter

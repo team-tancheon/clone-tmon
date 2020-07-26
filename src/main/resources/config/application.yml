@@ -1,4 +1,4 @@
-# jpa
+# JPA
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -11,6 +11,10 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: create
+
+# Static resource & Live reload
+---
+spring:
   thymeleaf:
     prefix: classpath:templates/
     suffix: .html
@@ -23,6 +27,10 @@ spring:
       enabled: true
   freemarker:
     cache: false
+
+---
+# Mail
+spring:
   mail:
     host: smtp.gmail.com
     port: 587
@@ -35,6 +43,7 @@ spring:
           auth: true
           starttls:
             enable: true
+
 # Port
 server:
   port: 8080
