@@ -34,8 +34,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: 아이디@gmail.com
-    password: 비밀번호
+    username: ENC(ItniJfK3tnaQQ2klks7mVk3yNWPSZTe8)
+    password: ENC(2Apb4GChU4gu9qhhjqwOPNg361eh3J0/)
     default-encoding: utf-8
     properties:
       mail:
@@ -43,6 +43,12 @@ spring:
           auth: true
           starttls:
             enable: true
+
+# Jasypt
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
 
 # Port
 server:
