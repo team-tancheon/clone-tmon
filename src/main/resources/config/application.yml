@@ -27,6 +27,9 @@ spring:
       enabled: true
   freemarker:
     cache: false
+  profiles:
+    include: oauth
+
 
 ---
 # Mail
@@ -43,13 +46,13 @@ spring:
           auth: true
           starttls:
             enable: true
-
+---
 # Jasypt
 jasypt:
   encryptor:
     algorithm: PBEWithMD5AndDES
     iv-generator-classname: org.jasypt.iv.NoIvGenerator
-
+---
 # Port
 server:
   port: 8080
