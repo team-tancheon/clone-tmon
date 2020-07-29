@@ -24,7 +24,7 @@ spring:
     static-path-pattern: /static/**
   devtools:
     livereload:
-      enabled: true
+      enabled: false
   freemarker:
     cache: false
   profiles:
@@ -56,3 +56,14 @@ jasypt:
 # Port
 server:
   port: 8080
+
+---
+# OAuth
+oauth:
+  google:
+    client-id: ENC(qTVXCT0HlWyOwm8wkgD4yCKbN/2ENSATQdCumFgjxmAahM5YRhztoPGfFRMncNvVJq+tyWqmML0ptz63lzH4yoLgHVmqvPX8mIaty2F0LkngiM4RSR+6ZQ==)
+    client-secret: ENC(HgV+CH71ZrsYmmpSG6CQ+j8I9pS6rJtTpo3iCHMtCybGp+5FjLLUYg==)
+    api-url: https://www.googleapis.com/oauth2/v2
+  kakao:
+    client-id: ENC(mfN0JsuWY9mITzLpzug3TXWVSsJ2MRRSOxUpozb+bMzywfN1kQT+OPYI15IgYw2T)
+    api-url: https://kapi.kakao.com/v1

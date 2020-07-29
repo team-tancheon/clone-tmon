@@ -3,13 +3,10 @@ package com.tancheon.tmon.dto;
 import com.tancheon.tmon.domain.User;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import java.util.Calendar;
 
-@Data
-//@NoArgsConstructor
+@Getter
+@Setter
 public class UserDTO {
     private long id;
     private String email;
@@ -22,8 +19,7 @@ public class UserDTO {
     private String emailRandKey;
 
     // DTO field
-    private String rePassword;
-
+    private String passwordConfirm;
 
     public User toEntity(){
         return User.builder()

@@ -1,6 +1,0 @@
-oauth:
-  google:
-    clientid: ENC(qTVXCT0HlWyOwm8wkgD4yCKbN/2ENSATQdCumFgjxmAahM5YRhztoPGfFRMncNvVJq+tyWqmML0ptz63lzH4yoLgHVmqvPX8mIaty2F0LkngiM4RSR+6ZQ==)
-    clientsecret: ENC(HgV+CH71ZrsYmmpSG6CQ+j8I9pS6rJtTpo3iCHMtCybGp+5FjLLUYg==)
-  kakao:
-    appkey: ENC(mfN0JsuWY9mITzLpzug3TXWVSsJ2MRRSOxUpozb+bMzywfN1kQT+OPYI15IgYw2T)
