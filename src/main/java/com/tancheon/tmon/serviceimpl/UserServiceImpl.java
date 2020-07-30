@@ -6,16 +6,12 @@ import com.tancheon.tmon.domain.User;
 import com.tancheon.tmon.dto.UserDTO;
 import com.tancheon.tmon.manager.OAuthManager;
 import com.tancheon.tmon.repository.UserRepository;
+import com.tancheon.tmon.service.MailService;
 import com.tancheon.tmon.service.OAuthService;
 import com.tancheon.tmon.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import java.util.*;
 
 @RequiredArgsConstructor
@@ -24,9 +20,9 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-    private final JavaMailSender mailSender;
-
     private final OAuthManager oauthManager;
+
+    private final MailService mailService;
 
     /**
      * <p>회원가입을 신청한 유저 정보를 저장</p>
@@ -52,42 +48,11 @@ public class UserServiceImpl implements UserService {
         User result = userRepository.save(user.toEntity());
 
         if (userRepository.save(user.toEntity()) != null) {
-            sendEmailKey(result.getEmail(), randKey);
+            mailService.sendSignupMessage(null, user.getEmail(), user.getEmailRandKey());
             return true;
         }
 
         return false;
-    }
-
-    /**
-     * <p>회원 가입시 입력한 이메일로 인증 메일 송신</p>
-     * @param email 메일을 보낼 계정
-     * @Param emailRandKey 인증키 난수
-     */
-    @Override
-    public void sendEmailKey(String email, String emailRandKey) {
-
-        MimeMessage mail = mailSender.createMimeMessage();
-
-        /**
-         * TODO - MailUtil, Thymeleaf Template으로 메일 관련 로직 빼야 함. Key 값 따라서 다른 메일 발송하도록 공통 메시지도 정의 필요
-         */
-
-        // FIXME : URL DOMAIN 주의
-        String mailText = "<p>Welcome ! </p><br>"
-                +"<p>Thank you for creating your Tmon Account</p><br>"
-                +"<p>To complete your registration, click the link below</p><br>"
-                +"<p><a href='http://localhost:8080/user/complete-signup?email="+email+"&key="+emailRandKey+"'>click link</a></p><br>"
-                +"<p>Tmon Team</p><br>";
-
-        try {
-            mail.setSubject("Complete your account registration", "utf-8");
-            mail.setText(mailText,"utf-8","html");
-            mail.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
-            mailSender.send(mail);
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
     }
 
     /**

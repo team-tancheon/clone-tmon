@@ -7,8 +7,6 @@ public interface UserService {
 
     boolean registerAccount(UserDTO user);
 
-    void sendEmailKey(String email, String emailRandKey);
-
     boolean signUpComplete(String email, String key);
 
     JsonNode getOAuthUserInfo(String provider, String code) throws Exception;
