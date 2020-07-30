@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragment/head :: commonHead"></head>
-
 <body>
     <!-- Page Preloder -->
     <div id="preloder">
@@ -13,8 +12,7 @@
     <section th:replace="fragment/hero :: commonHero"></section>
     <section th:replace="fragment/breadcrumb :: commonBreadCrumb('Sign in', 'sign in', 'Home')"></section>
 
-<!--
-    Checkout Section Begin -->
+    <!-- Checkout Section Begin -->
     <section class="checkout spad">
         <div class="container">
             <div class="checkout__form">
@@ -26,18 +24,30 @@
                                 <p>email</p>
                                 <input type="text">
                             </div>
-                                <div class="checkout__input">
-                                    <p>password</p>
-                                    <input type="password">
-                                </div>
-                                <div class="checkout__input__checkbox">
-                                    <label for="acc">
-                                        remember Me
-                                        <input type="checkbox" id="acc">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
+                            <div class="checkout__input">
+                                <p>password</p>
+                                <input type="password">
+                            </div>
+                            <div class="checkout__input__checkbox">
+                                <label for="acc">
+                                    remember Me
+                                    <input type="checkbox" id="acc">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
                             <button type="submit" class="site-btn col-lg-12 col-md-12">Sign In</button>
+                            <div class="or-container">
+                                <div class="line-separator"></div>
+                                <div class="or-label">or</div>
+                                <div class="line-separator"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <a class="btn btn-lg btn-google btn-block text-uppercase btn-outline" href="#">
+                                        <img src="https://img.icons8.com/color/16/000000/google-logo.png"> Sign in with Google
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>
