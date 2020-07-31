@@ -3467,7 +3467,7 @@ ol {
 	}
 }
 
-/* OAuth(Google-btn) style */
+/* OAuth(Google-btn) */
 .btn {
     border-radius: 2px;
     text-transform: capitalize;
@@ -3482,6 +3482,19 @@ ol {
     box-shadow: 0 1px 2px 1px #ddd
 }
 
+/* OAuth(Kakao-btn) */
+.btn-kakao {
+    color: #181600;
+    background-color: #fee500;
+    box-shadow: 0 1px 2px 1px #ddd
+}
+
+.btn-kakao img {
+    width: 16px;
+    height: 16px;
+}
+
+/* or line */
 .or-container {
     align-items: center;
     color: #ccc;

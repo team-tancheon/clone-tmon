@@ -13,6 +13,9 @@ public class TestController {
 
     private final Logger log = LoggerFactory.getLogger(TestController.class);
 
+    @GetMapping(value = "/")
+    public String indexView() { return "index"; }
+
     @GetMapping(value = "/blog")
     public String blogView() {
         return "blog";
@@ -31,11 +34,6 @@ public class TestController {
     @GetMapping(value = "/contact")
     public String contact() {
         return "contact";
-    }
-
-    @GetMapping(value = "/index")
-    public String index() {
-        return "index";
     }
 
     @GetMapping(value = "/main")
