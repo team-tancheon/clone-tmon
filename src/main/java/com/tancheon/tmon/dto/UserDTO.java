@@ -19,7 +19,7 @@ public class UserDTO {
     private String emailRandKey;
 
     // DTO field
-    private String passwordConfirm;
+    private String confirmPassword;
 
     public User toEntity(){
         return User.builder()

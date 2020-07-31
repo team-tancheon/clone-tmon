@@ -407,6 +407,26 @@ ol {
 	margin-right: 6px;
 }
 
+.header__top__right__auth ul li {
+    font-size: 14px;
+    color: #1c1c1c;
+    display: inline-block;
+    margin-right: 45px;
+    position: relative;
+    list-style: none;
+}
+
+.header__top__right__auth ul li:not(:last-child)::after {
+    position: absolute;
+    right: -25px;
+    top: 1px;
+    height: 20px;
+    width: 1px;
+    background: #000000;
+    opacity: 0.1;
+    content: "";
+}
+
 .header__logo {
 	padding: 15px 0;
 }
@@ -3512,4 +3532,9 @@ ol {
     flex-grow: 1;
     margin: 0 15px;
     text-align: center
+}
+
+.checkout__input__description {
+    margin-top: -20px;
+    font-size: 10px;
 }

@@ -30,8 +30,6 @@ public class UserController {
     @PostMapping("/signup")
     public ResponseEntity<String> signupAccount(UserDTO user){
 
-        System.out.println("회원가입");
-
         /**
          * TODO - 입력값 검증 - @NotNull, @Size 같은 어노테이션으로 DTO 클래스 내에 Validation 어노테이션 적용 후 GlobalExceptionHandler에서 예외 처리 필요
          */

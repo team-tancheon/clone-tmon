@@ -19,92 +19,51 @@
         <div class="container">
             <div class="checkout__form">
                 <h4>Sign Up</h4>
-                <form action="#">
+                <form action="/user/signup" method="post">
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
                             <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Fist Name<span>*</span></p>
-                                        <input type="text">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Last Name<span>*</span></p>
-                                        <input type="text">
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="checkout__input">
-                                <p>Address<span>*</span></p>
-                                <input type="text" placeholder="Street Address" class="checkout__input__add">
-                                <input type="text" placeholder="Apartment, suite, unite ect (optinal)">
-                            </div>
-                            <div class="checkout__input">
-                                <p>Town/City<span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="checkout__input">
-                                <p>Country/State<span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="checkout__input">
-                                <p>Postcode / ZIP<span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Phone<span>*</span></p>
-                                        <input type="text">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     <div class="checkout__input">
                                         <p>Email<span>*</span></p>
-                                        <input type="text">
+                                        <input type="text" name="email">
                                     </div>
                                 </div>
                             </div>
-                            <div class="checkout__input__checkbox">
-                                <label for="acc">
-                                    Create an account?
-                                    <input type="checkbox" id="acc">
-                                    <span class="checkmark"></span>
-                                </label>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="checkout__input">
+                                        <p>Name<span>*</span></p>
+                                        <input type="text" name="name">
+                                    </div>
+                                </div>
                             </div>
-                            <p>Create an account by entering the information below. If you are a returning customer
-                                please login at the top of the page</p>
-                            <div class="checkout__input">
-                                <p>Account Password<span>*</span></p>
-                                <input type="text">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="checkout__input">
+                                        <p>Password<span>*</span></p>
+                                        <input type="password" name="password">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="checkout__input__checkbox">
-                                <label for="diff-acc">
-                                    Ship to a different address?
-                                    <input type="checkbox" id="diff-acc">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="checkout__input">
-                                <p>Order notes<span>*</span></p>
-                                <input type="text"
-                                    placeholder="Notes about your order, e.g. special notes for delivery.">
+                            <p class="checkout__input__description">8 ~ 20자의 영문 대/소문자, 숫자, 특수문자를 사용하세요.</p>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="checkout__input">
+                                        <p>Confirm Password<span>*</span></p>
+                                        <input type="password" name="confirmPassword">
+                                    </div>
+                                </div>
                             </div>
                             <button type="submit" class="site-btn col-lg-12 col-md-12">Sign Up</button>
                         </div>
-                        
                     </div>
                 </form>
             </div>
         </div>
     </section>
     <!-- Checkout Section End -->
-
     <body th:insert="fragment/body :: commonBody"></body>
     <footer th:replace="fragment/footer :: commonFooter"></footer>
 </body>
-
 </html>
