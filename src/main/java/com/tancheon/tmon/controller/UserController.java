@@ -8,6 +8,7 @@ import com.tancheon.tmon.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +37,9 @@ public class UserController {
 
         try {
             userService.registerAccount(user);
+        } catch (DataIntegrityViolationException e) {
+            String responseMessage = "이미 가입된 이메일입니다.\n다시 입력해주세요.";      // message 공통화 필요
+            return new ResponseEntity<>(responseMessage, HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             log.error("signupAccount Failed => " + e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

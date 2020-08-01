@@ -10,6 +10,7 @@ import com.tancheon.tmon.service.MailService;
 import com.tancheon.tmon.service.OAuthService;
 import com.tancheon.tmon.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -19,10 +20,9 @@ import java.util.*;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-
     private final OAuthManager oauthManager;
-
     private final MailService mailService;
+    private final PasswordEncoder passwordEncoder;
 
     /**
      * <p>회원가입을 신청한 유저 정보를 저장</p>
@@ -36,16 +36,9 @@ public class UserServiceImpl implements UserService {
         /**
          * TODO - 회원가입 정보 디비 입력 & 비밀번호 암호화 & 이메일 인증 보내기
          */
-
-        // FIXME : 비밀번호 암호화하기 -> SpringSecurity BCryptPasswordEncoder 이용해서 encode() 필요
-        String encryptPassword = user.getPassword();
-        user.setPassword(encryptPassword);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setSignUpTime(new GregorianCalendar());
-
-        String randKey = UUIDUtil.createUUID(6);    // 6자리 난수 생성 - 우선 UUID로 사용하였음
-        user.setEmailRandKey(randKey);
-
-        User result = userRepository.save(user.toEntity());
+        user.setEmailRandKey(UUIDUtil.createUUID(6));
 
         if (userRepository.save(user.toEntity()) != null) {
             mailService.sendSignupMessage(null, user.getEmail(), user.getEmailRandKey());
