@@ -3,7 +3,6 @@ package com.tancheon.tmon.controller;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.tancheon.tmon.dto.UserDTO;
 import com.tancheon.tmon.manager.OAuthManager;
-import com.tancheon.tmon.service.OAuthService;
 import com.tancheon.tmon.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -13,11 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/user")
+@RequestMapping("/user/v1")
 public class UserController {
 
     private final Logger log = LoggerFactory.getLogger(UserController.class);
@@ -25,18 +22,18 @@ public class UserController {
     private final OAuthManager oauthManager;
 
     /**
-     * 회원가입)
+     * 회원가입
      * @param user 회원가입 입력값 [이메일, 비밀번호, 비밀번호 재입력, 이름]
      */
-    @PostMapping("/signup")
-    public ResponseEntity<String> signupAccount(UserDTO user){
+    @PostMapping(value = "/signup")
+    public ResponseEntity<String> signup(UserDTO user){
 
         /**
          * TODO - 입력값 검증 - @NotNull, @Size 같은 어노테이션으로 DTO 클래스 내에 Validation 어노테이션 적용 후 GlobalExceptionHandler에서 예외 처리 필요
          */
 
         try {
-            userService.registerAccount(user);
+            userService.signup(user);
         } catch (DataIntegrityViolationException e) {
             String responseMessage = "이미 가입된 이메일입니다.\n다시 입력해주세요.";      // message 공통화 필요
             return new ResponseEntity<>(responseMessage, HttpStatus.BAD_REQUEST);
@@ -51,16 +48,16 @@ public class UserController {
     /**
      * 회원가입) 이메일 인증 완료
      * @param email 회원 이메일
-     * @param code 인증코드
+     * @param authCode 인증 토큰
      */
-    @GetMapping("/authorize")
+    @GetMapping(value = "/code/authorize")
     public String authorize(@RequestParam(value = "email") String email,
-                            @RequestParam(value = "code") String code){
+                            @RequestParam(value = "authCode") String authCode){
 
         boolean isAuthorized = false;
 
         try {
-            isAuthorized = userService.signUpComplete(email, code);
+            isAuthorized = userService.authorize(email, authCode);
         } catch (Exception e) {
             log.error("authorize failed => " + e.getMessage());
             return "인증 실패";
@@ -69,29 +66,16 @@ public class UserController {
         return isAuthorized ? "인증 성공" : "인증 실패";
     }
 
-    @GetMapping(value="/oauth/loginview")
-    public void oauthLoginView(@RequestParam(value = "provider") String provider,
-                               HttpServletResponse response) {
-
-        try {
-            OAuthService oauthService = oauthManager.getServiceObject(provider);
-            response.sendRedirect(oauthService.getRedirectUrl());
-        } catch (Exception e) {
-            log.error("oauthLoginView Failed => " + e.getMessage());
-        }
-    }
-
-    // TODO - 논의 후 redirect uri 변경 필요
-    @GetMapping(value = "/{provider}-login")
-    public ResponseEntity<String> getOAuthUserInfo(@PathVariable(value = "provider") String provider,
-                                                   @RequestParam(value = "code") String code) {
+    @GetMapping(value = "/signin/oauth")
+    public ResponseEntity<String> oauthSignin(@RequestParam(value = "provider") String provider,
+                                              @RequestParam(value = "code") String code) {
 
         JsonNode result = null;
 
         try {
-            result = userService.getOAuthUserInfo(provider, code);
+            result = userService.oauthSignin(provider, code);
         } catch (Exception e) {
-            log.error("getOAuthUserInfo Failed => " + e.getMessage());
+            log.error("oauthSignin Failed => " + e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 

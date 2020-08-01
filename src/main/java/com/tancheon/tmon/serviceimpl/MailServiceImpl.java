@@ -20,24 +20,22 @@ public class MailServiceImpl implements MailService {
 
     private final SpringTemplateEngine templateEngine;
 
-    /**
-     * References : https://rooted.tistory.com/2
-     */
+    // References : https://rooted.tistory.com/2
     @Override
-    public boolean sendSignupMessage(String subject, String toEmail, String key) {
+    public boolean sendSignupMessage(String subject, String toEmail, String authCode) {
 
         try {
             MimeMessage message = mailSender.createMimeMessage();
 
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
-            helper.setSubject(subject);    // subject : Complete your account registration
+            helper.setSubject(subject);
             helper.setTo(new InternetAddress(toEmail));
 
             Context context = new Context();
             context.setVariable("email", toEmail);
-            context.setVariable("key", key);
+            context.setVariable("authCode", authCode);
 
-            String htmlContent = templateEngine.process("mail/complete-signup", context);
+            String htmlContent = templateEngine.process("mail/authorize-mail", context);
             helper.setText(htmlContent, true);
 
             mailSender.send(message);

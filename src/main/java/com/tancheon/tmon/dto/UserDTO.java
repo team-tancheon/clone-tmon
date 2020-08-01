@@ -12,11 +12,11 @@ public class UserDTO {
     private String email;
     private String password;
     private String name;
-    private Calendar signUpTime;
-    private Calendar lastLoginTime;
+    private Calendar signupTime;
+    private Calendar lastSigninTime;
     private Calendar passwordChangeTime;
     private boolean emailAuthorized;
-    private String emailRandKey;
+    private String emailAuthCode;
 
     // DTO field
     private String confirmPassword;
@@ -27,11 +27,11 @@ public class UserDTO {
                 .email(email)
                 .password(password)
                 .name(name)
-                .signUpTime(signUpTime)
-                .lastLoginTime(lastLoginTime)
+                .signupTime(signupTime)
+                .lastSigninTime(lastSigninTime)
                 .passwordChangeTime(passwordChangeTime)
                 .emailAuthorized(emailAuthorized)
-                .emailRandKey(emailRandKey)
+                .emailAuthCode(emailAuthCode)
                 .build();
     }
 }

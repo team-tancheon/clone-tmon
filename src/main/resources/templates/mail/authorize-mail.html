@@ -9,7 +9,7 @@
                 Welcome !<br>
                 Thank you for creating your Tmon Account<br>
                 To complete your registration, click the link below<br>
-                <a th:href="@{http://localhost:8080/user/complete-signup(email=${email}, key=${key})}">
+                <a th:href="@{http://localhost:8080/user/v1/code/authorize(email=${email}, authCode=${authCode})}">
                 <!--<a th:href="@{${href}(email=${email}, key=${key})}">-->
                     Click link
                 </a><br>

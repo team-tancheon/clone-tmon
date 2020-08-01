@@ -5,9 +5,9 @@ import com.tancheon.tmon.dto.UserDTO;
 
 public interface UserService {
 
-    boolean registerAccount(UserDTO user);
+    boolean signup(UserDTO user);
 
-    boolean signUpComplete(String email, String key);
+    boolean authorize(String email, String authCode);
 
-    JsonNode getOAuthUserInfo(String provider, String code) throws Exception;
+    JsonNode oauthSignin(String provider, String code) throws Exception;
 }
