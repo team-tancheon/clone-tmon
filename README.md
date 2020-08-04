@@ -85,6 +85,7 @@
 ## Git Branch 전략
 
 - Branch는 develop, master 2개로 구성
+
 - 개발 코드는 develop에 반영 후 master로 merge  
 
 
