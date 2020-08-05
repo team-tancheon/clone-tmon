@@ -2,8 +2,10 @@ package com.tancheon.tmon.serviceimpl;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.tancheon.tmon.common.util.UUIDUtil;
+import com.tancheon.tmon.domain.OAuth;
 import com.tancheon.tmon.domain.User;
 import com.tancheon.tmon.dto.UserDTO;
+import com.tancheon.tmon.exception.EmailAuthFailedException;
 import com.tancheon.tmon.manager.OAuthManager;
 import com.tancheon.tmon.repository.UserRepository;
 import com.tancheon.tmon.service.MailService;
@@ -38,7 +40,7 @@ public class UserServiceImpl implements UserService {
         user.setEmailAuthCode(UUIDUtil.createUUID(6));
 
         if (userRepository.save(user.toEntity()) != null) {
-            mailService.sendSignupMessage("Complete your account registration", user.getEmail(), user.getEmailAuthCode());  // subject 공통 메시지화 필요(Complete your account registration)
+            mailService.sendSignupMail(user.getEmail(), user.getEmailAuthCode());
             return true;
         }
 
@@ -53,7 +55,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public boolean authorize(String email, String authCode) {
+    public boolean authorize(String email, String authCode) throws EmailAuthFailedException {
 
         User user = userRepository.findByEmailAndEmailAuthCode(email, authCode);
 
@@ -61,19 +63,19 @@ public class UserServiceImpl implements UserService {
             user.setEmailAuthorized(true);
 
             if (userRepository.save(user) != null) {
-                // TODO - 계정 활성화 메일 발송
+                mailService.sendCreateAccountSuccessMail(user.getEmail());
                 return true;
             }
         }
 
-        return false;
+        throw new EmailAuthFailedException();
     }
 
     // TODO - oauthSignup과 통합 고려 -> 사전 확인 필요(권한 동의 절차)
     @Override
-    public JsonNode oauthSignin(String provider, String code) throws Exception {
+    public JsonNode oauthSignin(OAuth.Provider provider, String code) throws Exception {
 
-        OAuthService oauthService = oauthManager.getServiceObject(provider);
+        OAuthService oauthService = oauthManager.getServiceObject(provider.name());
         String accessToken = oauthService.getAccessToken(code);
 
         /**

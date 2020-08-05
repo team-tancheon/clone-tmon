@@ -17,33 +17,39 @@ import javax.mail.internet.MimeMessage;
 public class MailServiceImpl implements MailService {
 
     private final JavaMailSender mailSender;
-
     private final SpringTemplateEngine templateEngine;
 
-    // References : https://rooted.tistory.com/2
     @Override
-    public boolean sendSignupMessage(String subject, String toEmail, String authCode) {
+    public void sendSignupMail(String toEmail, String authCode) {
+        Context context = new Context();
+        context.setVariable("email", toEmail);
+        context.setVariable("authCode", authCode);
 
+        sendMail(MailTemplate.AUTHORIZE_MAIL, context);
+    }
+
+    @Override
+    public void sendCreateAccountSuccessMail(String toEmail) {
+        Context context = new Context();
+        context.setVariable("email", toEmail);
+
+        sendMail(MailTemplate.CREATE_ACCOUNT_SUCCESS_MAIL, context);
+    }
+
+    private void sendMail(MailTemplate template, Context context) {
         try {
             MimeMessage message = mailSender.createMimeMessage();
 
+            String htmlContent = templateEngine.process(template.getFilePath(), context);
+
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
-            helper.setSubject(subject);
-            helper.setTo(new InternetAddress(toEmail));
-
-            Context context = new Context();
-            context.setVariable("email", toEmail);
-            context.setVariable("authCode", authCode);
-
-            String htmlContent = templateEngine.process("mail/authorize-mail", context);
+            helper.setSubject(template.getSubject());
+            helper.setTo(new InternetAddress(context.getVariable("email").toString()));
             helper.setText(htmlContent, true);
 
             mailSender.send(message);
         } catch (MessagingException e) {
             e.printStackTrace();
-            return false;
         }
-
-        return true;
     }
 }

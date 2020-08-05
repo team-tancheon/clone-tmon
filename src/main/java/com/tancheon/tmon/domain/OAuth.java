@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Entity(name = "oauth")
 public class OAuth {
 
-    private enum OAuthProvider {
+    public enum Provider {
         GOOGLE,
         KAKAO
     }
@@ -28,5 +28,5 @@ public class OAuth {
     private long userId;
 
     @Column(name = "provider", nullable = false, columnDefinition = "varchar(10)")
-    private OAuthProvider provider;
+    private Provider provider;
 }
