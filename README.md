@@ -40,7 +40,7 @@
   
 ### IDE
 
-- IntelliJ IDEA Community Edition  
+- IntelliJ IDEA Community Edition 
 
   
 
