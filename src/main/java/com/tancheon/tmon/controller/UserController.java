@@ -22,7 +22,7 @@ import javax.validation.constraints.NotNull;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/user/v1")
+@RequestMapping(value = "/user/v1")
 @Validated
 public class UserController extends BaseController {
 

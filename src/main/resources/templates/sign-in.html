@@ -17,47 +17,45 @@
         <div class="container">
             <div class="checkout__form">
                 <h4>Sign In</h4>
-                <form action="/user/v1/signin" method="post">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12">
-                            <div class="checkout__input">
-                                <p>email</p>
-                                <input type="text" name="email">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="checkout__input">
+                            <p>email</p>
+                            <input id="email" type="text">
+                        </div>
+                        <div class="checkout__input">
+                            <p>password</p>
+                            <input id="password" type="password">
+                        </div>
+                        <div class="checkout__input__checkbox">
+                            <label for="acc">
+                                remember Me
+                                <input type="checkbox" id="acc">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <button type="submit" class="site-btn col-lg-12 col-md-12" onclick="signin()">Sign In</button>
+                        <div class="or-container">
+                            <div class="line-separator"></div>
+                            <div class="or-label">or</div>
+                            <div class="line-separator"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a class="btn btn-lg btn-google btn-block btn-outline" href="/view/signin/oauth/google">
+                                    <img src="/static/img/google-symbol.png"> Sign in with Google
+                                </a>
                             </div>
-                            <div class="checkout__input">
-                                <p>password</p>
-                                <input type="password" name="password">
-                            </div>
-                            <div class="checkout__input__checkbox">
-                                <label for="acc">
-                                    remember Me
-                                    <input type="checkbox" id="acc">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <button type="submit" class="site-btn col-lg-12 col-md-12">Sign In</button>
-                            <div class="or-container">
-                                <div class="line-separator"></div>
-                                <div class="or-label">or</div>
-                                <div class="line-separator"></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <a class="btn btn-lg btn-google btn-block btn-outline" href="/view/signin/oauth/google">
-                                        <img src="/static/img/google-symbol.png"> Sign in with Google
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-md-12">
-                                    <a class="btn btn-lg btn-kakao btn-block btn-outline" href="/view/signin/oauth/kakao">
-                                        <img src="/static/img/kakao-symbol.png"> Sign in with Kakao
-                                    </a>
-                                </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <a class="btn btn-lg btn-kakao btn-block btn-outline" href="/view/signin/oauth/kakao">
+                                    <img src="/static/img/kakao-symbol.png"> Sign in with Kakao
+                                </a>
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </section>
@@ -66,5 +64,21 @@
     <body th:insert="fragment/body :: commonBody"></body>
     <footer th:replace="fragment/footer :: commonFooter"></footer>
 </body>
+<script>
+    // Reference - axios 러닝 가이드 : https://yamoo9.github.io/axios/guide/usage.html#post-%EC%9A%94%EC%B2%AD
+    function signin() {
+        const params = new URLSearchParams();
+        params.append("email", $("#email").val());
+        params.append("password", $("#password").val());
 
+        axios.post('/user/v1/signin', params)
+            .then(response => {
+                alert("로그인에 성공했습니다.");
+            })
+            .catch(error => {
+                console.log(error.response);
+                alert("로그인에 실패하였습니다.");
+            });
+    }
+</script>
 </html>
