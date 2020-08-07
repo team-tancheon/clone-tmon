@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @RestController
 @RequiredArgsConstructor
@@ -76,8 +77,8 @@ public class UserController extends BaseController {
         return responseSuccess();
     }
 
-    @GetMapping(value = "/signin/oauth")
-    public ResponseEntity oauthSignin(@NotEmpty @RequestParam(value = "provider") OAuth.Provider provider,
+    @GetMapping(value = "/signin/oauth/{provider}")
+    public ResponseEntity oauthSignin(@NotNull @PathVariable(value = "provider") OAuth.Provider provider,
                                       @NotEmpty @RequestParam(value = "code") String code) {
 
         JsonNode result = null;

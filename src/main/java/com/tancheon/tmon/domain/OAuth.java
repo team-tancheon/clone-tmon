@@ -15,8 +15,8 @@ import javax.persistence.*;
 public class OAuth {
 
     public enum Provider {
-        GOOGLE,
-        KAKAO
+        google,
+        kakao
     }
 
     @Id

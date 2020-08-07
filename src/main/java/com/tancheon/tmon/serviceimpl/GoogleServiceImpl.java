@@ -38,14 +38,14 @@ public class GoogleServiceImpl implements OAuthService {
 
         String clientId = properties.getGoogle().get("client-id");
         String clientSecret = properties.getGoogle().get("client-secret");
-        String redirectURI = "http://localhost:8080/user/google-login";
+        String redirectUri = "http://localhost:8080/user/v1/signin/oauth/google";
         String requestURI = "https://oauth2.googleapis.com/token";
 
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("code", code));
         params.add(new BasicNameValuePair("client_id", clientId));
         params.add(new BasicNameValuePair("client_secret", clientSecret));
-        params.add(new BasicNameValuePair("redirect_uri", redirectURI));
+        params.add(new BasicNameValuePair("redirect_uri", redirectUri));
         params.add(new BasicNameValuePair("grant_type","authorization_code"));
 
         JsonNode returnNode = null;
@@ -101,7 +101,7 @@ public class GoogleServiceImpl implements OAuthService {
     public String getRedirectUrl() {
 
         String clientId = properties.getGoogle().get("client-id");
-        String redirectUri = "http://localhost:8080/user/google-login";
+        String redirectUri = "http://localhost:8080/user/v1/signin/oauth/google";
         String accessType = "offline";
         String includeGrantedScopes = "true";
 

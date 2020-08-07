@@ -37,13 +37,13 @@ public class KakaoServiceImpl implements OAuthService {
     public String getAccessToken(String code) {
 
         String clientId = properties.getKakao().get("client-id");
-        String redirectUri = "http://localhost:8080/user/kakao-login";
+        String redirectUri = "http://localhost:8080/user/v1/signin/oauth/kakao";
         String requestUri = "https://kauth.kakao.com/oauth/token";
 
         final List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("grant_type", "authorization_code"));
         params.add(new BasicNameValuePair("client_id", clientId)); // REST API KEY
-        params.add(new BasicNameValuePair("redirect_uri",redirectUri));
+        params.add(new BasicNameValuePair("redirect_uri", redirectUri));
         params.add(new BasicNameValuePair("code",code));
 
         JsonNode returnNode = null;
@@ -110,7 +110,7 @@ public class KakaoServiceImpl implements OAuthService {
     public String getRedirectUrl() {
 
         String clientId = properties.getKakao().get("client-id");
-        String redirectURI = "http://localhost:8080/user/kakao-login";
+        String redirectURI = "http://localhost:8080/user/v1/signin/oauth/kakao";
 
         StringBuffer url = new StringBuffer();
         url.append("https://kauth.kakao.com/oauth/authorize?");
