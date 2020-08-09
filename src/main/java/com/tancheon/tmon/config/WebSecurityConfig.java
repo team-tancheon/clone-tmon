@@ -16,8 +16,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     // references : https://victorydntmd.tistory.com/328
     @Override
     public void configure(WebSecurity web) throws Exception {
-        // static 하위 목록은 인증 무시 (=항상 통과)
-        web.ignoring().antMatchers("/static/**");
+        // static 하위 목록은 인증 무시(= 항상 통과)
+        web.ignoring().antMatchers("/static/**",
+                        "/swagger-resources",
+                        "/swagger-ui.html",
+                        "/webjars/**",
+                        "/swagger/**");
     }
 
     @Override

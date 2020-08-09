@@ -10,6 +10,8 @@ import com.tancheon.tmon.exception.PasswordMismatchException;
 import com.tancheon.tmon.exception.UserNotFoundException;
 import com.tancheon.tmon.manager.OAuthManager;
 import com.tancheon.tmon.service.UserService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,8 +35,11 @@ public class UserController extends BaseController {
     private final UserService userService;
     private final OAuthManager oauthManager;
 
+    @ApiOperation(value = "로그인", httpMethod = "POST", notes = "로그인 API")
     @PostMapping(value = "/signin")
-    public ResponseEntity signin(@RequestParam(value = "email") String email,
+    public ResponseEntity signin(@ApiParam(value = "email", required = true)
+                                 @RequestParam(value = "email") String email,
+                                 @ApiParam(value = "password", required = true)
                                  @RequestParam(value = "password") String password) {
 
         try {
@@ -51,11 +56,7 @@ public class UserController extends BaseController {
         return responseSuccess();
     }
 
-
-    /**
-     * 회원가입
-     * @param user 회원가입 입력값 [이메일, 비밀번호, 비밀번호 재입력, 이름]
-     */
+    @ApiOperation(value = "회원가입", httpMethod = "POST", notes = "회원가입 API")
     @PostMapping(value = "/signup")
     public ResponseEntity signup(@Valid UserDTO user){
 
@@ -75,14 +76,12 @@ public class UserController extends BaseController {
         return responseSuccess(GeneralResponse.SIGNUP_SUCCESS);
     }
 
-    /**
-     * 회원가입) 이메일 인증 완료
-     * @param email 회원 이메일
-     * @param authCode 인증 토큰
-     */
+    @ApiOperation(value = "이메일 인증", httpMethod = "GET", notes = "이메일 인증 API")
     @GetMapping(value = "/code/authorize")
-    public ResponseEntity authorize(@NotEmpty @Email @RequestParam(value = "email") String email,
-                                    @NotEmpty @RequestParam(value = "authCode") String authCode){
+    public ResponseEntity authorize(@ApiParam(value = "이메일", required = true)
+                                    @NotEmpty @Email @RequestParam(value = "email") String email,
+                                    @ApiParam(value = "이메일 인증 코드", required = true)
+                                    @NotEmpty @RequestParam(value = "authCode") String authCode) {
 
         boolean isAuthorized = false;
 
@@ -99,8 +98,11 @@ public class UserController extends BaseController {
         return responseSuccess();
     }
 
+    @ApiOperation(value = "OAuth 로그인", httpMethod = "GET", notes = "OAuth 로그인 API")
     @GetMapping(value = "/signin/oauth/{provider}")
-    public ResponseEntity oauthSignin(@NotNull @PathVariable(value = "provider") OAuth.Provider provider,
+    public ResponseEntity oauthSignin(@ApiParam(value = "OAuth Provider(kakao, google)", required = true)
+                                      @NotNull @PathVariable(value = "provider") OAuth.Provider provider,
+                                      @ApiParam(value = "사용자 access_token 받기 요청에 필요한 코드", required = true)
                                       @NotEmpty @RequestParam(value = "code") String code) {
 
         JsonNode result = null;
