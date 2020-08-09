@@ -6,6 +6,9 @@ import com.tancheon.tmon.domain.OAuth;
 import com.tancheon.tmon.domain.User;
 import com.tancheon.tmon.dto.UserDTO;
 import com.tancheon.tmon.exception.EmailAuthFailedException;
+import com.tancheon.tmon.exception.NotAuthorizedException;
+import com.tancheon.tmon.exception.PasswordMismatchException;
+import com.tancheon.tmon.exception.UserNotFoundException;
 import com.tancheon.tmon.manager.OAuthManager;
 import com.tancheon.tmon.repository.UserRepository;
 import com.tancheon.tmon.service.MailService;
@@ -15,16 +18,35 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 @RequiredArgsConstructor
 @Service
-public class UserServiceImpl implements UserService {
+public
+class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final OAuthManager oauthManager;
     private final MailService mailService;
     private final PasswordEncoder passwordEncoder;
+
+    @Override
+    public void signin(String email, String password) {
+
+        User user = userRepository.findByEmail(email);
+
+        if (user == null) {
+            throw new UserNotFoundException();
+        } else if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new PasswordMismatchException();
+        } else if (!user.isEmailAuthorized()) {
+            throw new NotAuthorizedException();
+        }
+
+        user.setLastSigninTime(ZonedDateTime.now(ZoneId.of("Asia/Seoul")));
+        userRepository.save(user);
+    }
 
     /**
      * <p>회원가입을 신청한 유저 정보를 저장</p>
@@ -33,18 +55,15 @@ public class UserServiceImpl implements UserService {
      * @return  회원정보DB   입력 성공여부
      */
     @Override
-    public boolean signup(UserDTO user) {
+    public void signup(UserDTO user) {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setSignupTime(new GregorianCalendar());    // TODO - yyyy-mm-dd hh:mm:ss 형식으로 들어가도록 수정 필요
+        user.setSignupTime(ZonedDateTime.now(ZoneId.of("Asia/Seoul")));
         user.setEmailAuthCode(UUIDUtil.createUUID(6));
 
         if (userRepository.save(user.toEntity()) != null) {
             mailService.sendSignupMail(user.getEmail(), user.getEmailAuthCode());
-            return true;
         }
-
-        return false;
     }
 
     /**
@@ -55,7 +74,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public boolean authorize(String email, String authCode) throws EmailAuthFailedException {
+    public boolean authorize(String email, String authCode) {
 
         User user = userRepository.findByEmailAndEmailAuthCode(email, authCode);
 

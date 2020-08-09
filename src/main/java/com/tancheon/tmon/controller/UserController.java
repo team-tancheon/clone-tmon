@@ -5,6 +5,9 @@ import com.tancheon.tmon.domain.OAuth;
 import com.tancheon.tmon.domain.response.GeneralResponse;
 import com.tancheon.tmon.dto.UserDTO;
 import com.tancheon.tmon.exception.EmailAuthFailedException;
+import com.tancheon.tmon.exception.NotAuthorizedException;
+import com.tancheon.tmon.exception.PasswordMismatchException;
+import com.tancheon.tmon.exception.UserNotFoundException;
 import com.tancheon.tmon.manager.OAuthManager;
 import com.tancheon.tmon.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +33,25 @@ public class UserController extends BaseController {
     private final UserService userService;
     private final OAuthManager oauthManager;
 
+    @PostMapping(value = "/signin")
+    public ResponseEntity signin(@RequestParam(value = "email") String email,
+                                 @RequestParam(value = "password") String password) {
+
+        try {
+            userService.signin(email, password);
+        } catch (UserNotFoundException | PasswordMismatchException e) {
+            responseError(GeneralResponse.SIGNIN_FAILED);
+        } catch (NotAuthorizedException e) {
+            responseError(GeneralResponse.NOT_EMAIL_AUTHORIZED);
+        } catch (Exception e) {
+            log.error("signin Failed => " + e.getMessage());
+            responseError(GeneralResponse.INTERNAL_SERVER_ERROR);
+        }
+
+        return responseSuccess();
+    }
+
+
     /**
      * 회원가입
      * @param user 회원가입 입력값 [이메일, 비밀번호, 비밀번호 재입력, 이름]
@@ -44,13 +66,13 @@ public class UserController extends BaseController {
         try {
             userService.signup(user);
         } catch (DataIntegrityViolationException e) {
-            return responseError(GeneralResponse.DUPLICATE_EMAIL);
+            return responseError(GeneralResponse.REGISTERED_USER);
         } catch (Exception e) {
             log.error("signupAccount Failed => " + e.getMessage());
             return responseError(GeneralResponse.INTERNAL_SERVER_ERROR);
         }
 
-        return responseSuccess();
+        return responseSuccess(GeneralResponse.SIGNUP_SUCCESS);
     }
 
     /**

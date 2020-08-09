@@ -3,13 +3,14 @@ package com.tancheon.tmon.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.tancheon.tmon.domain.OAuth;
 import com.tancheon.tmon.dto.UserDTO;
-import com.tancheon.tmon.exception.EmailAuthFailedException;
 
 public interface UserService {
 
-    boolean signup(UserDTO user);
+    void signin(String email, String password);
 
-    boolean authorize(String email, String authCode) throws EmailAuthFailedException;
+    void signup(UserDTO user);
+
+    boolean authorize(String email, String authCode);
 
     JsonNode oauthSignin(OAuth.Provider provider, String code) throws Exception;
 }

@@ -4,7 +4,7 @@ import com.tancheon.tmon.domain.User;
 import lombok.*;
 
 import javax.validation.constraints.*;
-import java.util.Calendar;
+import java.time.ZonedDateTime;
 
 @Getter
 @Setter
@@ -26,9 +26,9 @@ public class UserDTO {
     @NotEmpty
     private String confirmPassword;
 
-    private Calendar signupTime;
-    private Calendar lastSigninTime;
-    private Calendar passwordChangeTime;
+    private ZonedDateTime signupTime;
+    private ZonedDateTime lastSigninTime;
+    private ZonedDateTime passwordChangeTime;
     private boolean emailAuthorized;
     private String emailAuthCode;
 

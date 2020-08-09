@@ -10,12 +10,16 @@ public enum GeneralResponse {
 
     // Common
     SUCCESS(200, "C001", "Success"),
-    INTERNAL_SERVER_ERROR(500, "C002", "Internal server error"),
+    SIGNUP_SUCCESS(200, "C002", "회원가입에 성공했습니다."),
+    INTERNAL_SERVER_ERROR(500, "C003", "서버에 문제가 발생하였습니다."),
 
     // User
-    DUPLICATE_EMAIL(500, "U001", "Email addresses are duplicate"),
-    EMAIL_AUTHENTICATION_FAILED(500, "U002", "Email authentication failed"),
-    PASSWORD_MISMATCH(500, "U003", "Password mismatch");
+    REGISTERED_USER(400, "U001", "등록된 이메일입니다."),
+    EMAIL_AUTHENTICATION_FAILED(401, "U002", "이메일 인증에 실패하였습니다."),
+    SIGNIN_FAILED(401, "U003", "아이디 또는 비밀번호가 일치하지 않습니다."),
+    PASSWORD_MISMATCH(401, "U004", "비밀번호가 일치하지 않습니다."),
+    NOT_EMAIL_AUTHORIZED(401, "U005", "이메일 인증을 해주세요.");
+
 
     private int status;
     private String code;

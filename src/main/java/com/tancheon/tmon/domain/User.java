@@ -3,7 +3,7 @@ package com.tancheon.tmon.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Calendar;
+import java.time.ZonedDateTime;
 
 @Getter
 @Setter
@@ -21,23 +21,20 @@ public class User {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "signup_time")
-    private Calendar signupTime;
+    @Column(name = "signup_time", columnDefinition = "TIMESTAMP NULL")
+    private ZonedDateTime signupTime;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "last_signin_time")
-    private Calendar lastSigninTime;
+    @Column(name = "last_signin_time", columnDefinition = "TIMESTAMP NULL")
+    private ZonedDateTime lastSigninTime;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "password_change_time")
-    private Calendar passwordChangeTime;
+    @Column(name = "password_change_time", columnDefinition = "TIMESTAMP NULL")
+    private ZonedDateTime passwordChangeTime;
 
     @Column(name = "email_authorized", nullable = false, columnDefinition = "TINYINT", length = 1)
     private boolean emailAuthorized;

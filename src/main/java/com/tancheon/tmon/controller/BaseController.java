@@ -7,7 +7,11 @@ import org.springframework.http.ResponseEntity;
 abstract class BaseController {
 
     ResponseEntity responseSuccess() {
-        return new ResponseEntity<>(GeneralResponse.SUCCESS, HttpStatus.valueOf(GeneralResponse.SUCCESS.getStatus()));
+        return responseSuccess(GeneralResponse.SUCCESS);
+    }
+
+    ResponseEntity responseSuccess(GeneralResponse response) {
+        return new ResponseEntity<>(response, HttpStatus.valueOf(response.getStatus()));
     }
 
     ResponseEntity responseError(GeneralResponse response) {
