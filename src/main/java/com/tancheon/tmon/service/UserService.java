@@ -10,7 +10,7 @@ public interface UserService {
 
     void signup(UserDTO user);
 
-    boolean authorize(String email, String authCode);
+    void authorize(String email, String authCode);
 
     JsonNode oauthSignin(OAuth.Provider provider, String code) throws Exception;
 }

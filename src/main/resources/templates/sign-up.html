@@ -75,6 +75,7 @@
         axios.post('/user/v1/signup', params)
             .then(response => {
                 alert(response.data.message);
+                location.href = "/view/signin";
             })
             .catch(error => {
                 alert(error.response.data.message);

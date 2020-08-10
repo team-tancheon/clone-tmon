@@ -65,7 +65,6 @@
     <footer th:replace="fragment/footer :: commonFooter"></footer>
 </body>
 <script>
-    // Reference - axios 러닝 가이드 : https://yamoo9.github.io/axios/guide/usage.html#post-%EC%9A%94%EC%B2%AD
     function signin() {
         const params = new URLSearchParams();
         params.append("email", $("#email").val());
@@ -73,8 +72,7 @@
 
         axios.post('/user/v1/signin', params)
             .then(response => {
-                alert("로그인에 성공했습니다.");
-                //location.href
+                location.href = "/";
             })
             .catch(error => {
                 alert(error.response.data.message);

@@ -45,12 +45,12 @@ public class UserController extends BaseController {
         try {
             userService.signin(email, password);
         } catch (UserNotFoundException | PasswordMismatchException e) {
-            responseError(GeneralResponse.SIGNIN_FAILED);
+            return responseError(GeneralResponse.SIGNIN_FAILED);
         } catch (NotAuthorizedException e) {
-            responseError(GeneralResponse.NOT_EMAIL_AUTHORIZED);
+            return responseError(GeneralResponse.NOT_EMAIL_AUTHORIZED);
         } catch (Exception e) {
             log.error("signin Failed => " + e.getMessage());
-            responseError(GeneralResponse.INTERNAL_SERVER_ERROR);
+            return responseError(GeneralResponse.INTERNAL_SERVER_ERROR);
         }
 
         return responseSuccess();
@@ -66,6 +66,8 @@ public class UserController extends BaseController {
 
         try {
             userService.signup(user);
+        } catch (EmailAuthFailedException e) {
+            return responseError(GeneralResponse.NOT_EMAIL_AUTHORIZED);
         } catch (DataIntegrityViolationException e) {
             return responseError(GeneralResponse.REGISTERED_USER);
         } catch (Exception e) {
@@ -83,10 +85,8 @@ public class UserController extends BaseController {
                                     @ApiParam(value = "이메일 인증 코드", required = true)
                                     @NotEmpty @RequestParam(value = "authCode") String authCode) {
 
-        boolean isAuthorized = false;
-
         try {
-            isAuthorized = userService.authorize(email, authCode);
+            userService.authorize(email, authCode);
         } catch (EmailAuthFailedException e) {
             log.error("authorize failed => " + e.getMessage());
             return responseError(GeneralResponse.EMAIL_AUTHENTICATION_FAILED);

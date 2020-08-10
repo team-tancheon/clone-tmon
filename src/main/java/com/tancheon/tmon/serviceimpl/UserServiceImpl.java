@@ -51,18 +51,24 @@ class UserServiceImpl implements UserService {
     /**
      * <p>회원가입을 신청한 유저 정보를 저장</p>
      *
-     * @param   user        회원가입 입력 정보
+     * @param   userDTO        회원가입 입력 정보
      * @return  회원정보DB   입력 성공여부
      */
     @Override
-    public void signup(UserDTO user) {
+    public void signup(UserDTO userDTO) {
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setSignupTime(ZonedDateTime.now(ZoneId.of("Asia/Seoul")));
-        user.setEmailAuthCode(UUIDUtil.createUUID(6));
+        User user = userRepository.findByEmail(userDTO.getEmail());
 
-        if (userRepository.save(user.toEntity()) != null) {
-            mailService.sendSignupMail(user.getEmail(), user.getEmailAuthCode());
+        if (user == null) {
+            userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+            userDTO.setSignupTime(ZonedDateTime.now(ZoneId.of("Asia/Seoul")));
+            userDTO.setEmailAuthCode(UUIDUtil.createUUID(6));
+
+            if (userRepository.save(userDTO.toEntity()) != null) {
+                mailService.sendSignupMail(userDTO.getEmail(), userDTO.getEmailAuthCode());
+            }
+        } else if (!user.isEmailAuthorized()) {
+            throw new EmailAuthFailedException();
         }
     }
 
@@ -74,20 +80,19 @@ class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public boolean authorize(String email, String authCode) {
+    public void authorize(String email, String authCode) {
 
         User user = userRepository.findByEmailAndEmailAuthCode(email, authCode);
 
-        if (user != null) {
+        if (user == null) {
+            throw new EmailAuthFailedException();
+        } else {
             user.setEmailAuthorized(true);
 
             if (userRepository.save(user) != null) {
                 mailService.sendCreateAccountSuccessMail(user.getEmail());
-                return true;
             }
         }
-
-        throw new EmailAuthFailedException();
     }
 
     // TODO - oauthSignup과 통합 고려 -> 사전 확인 필요(권한 동의 절차)

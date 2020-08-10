@@ -10,7 +10,7 @@ public enum GeneralResponse {
 
     // Common
     SUCCESS(200, "C001", "Success"),
-    SIGNUP_SUCCESS(200, "C002", "회원가입에 성공했습니다."),
+    SIGNUP_SUCCESS(200, "C002", "인증 메일이 발송되었습니다."),
     INTERNAL_SERVER_ERROR(500, "C003", "서버에 문제가 발생하였습니다."),
 
     // User
